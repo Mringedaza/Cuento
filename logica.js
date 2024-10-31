@@ -6,6 +6,7 @@ const resetButton = document.getElementById('back-button')
 
 // Estado del juego
 let storyStep = 0;
+const storyHistory =[];
 
 // Función para mostrar la historia y opciones en cada paso
 function displayStory(text, imageUrl = '', choices = []) {
@@ -31,12 +32,14 @@ function displayStory(text, imageUrl = '', choices = []) {
 
     // Mostrar el botón de continuar si no hay opciones
     continueButton.style.display = choices.length === 0 ? 'block' : 'none';
+    resetButton.style.display = storyStep > 0 ? 'block' : 'none';
 
     
 }
 
 // Función para avanzar en la historia
 function nextStory() {
+    storyHistory.push(storyStep);
     storyStep++;
     switch (storyStep) {
         case 1:
@@ -63,6 +66,7 @@ function nextStory() {
         case 4:
             displayStory(
                 "El árbol convocó a Izel, quien no tenía prejuicios hacia ninguna cultura, para salvar a su pueblo. Aquí comienza la historia de cómo Izel intentará salvar Zolkin.",
+                "imagenes/izel_arbol.jpg",
                 '',
                 []
             );
@@ -70,13 +74,22 @@ function nextStory() {
         case 5:
             displayStory(
                 "Izel: Hoy el día está más oscuro de lo normal, parece que es más pronto de lo que creí. Siento una presión en el pecho, no es solo sobre el árbol, es sobre unir a nuestra gente.\n Izel necesita visitar con una tribu...",
-                '',
+                'imagenes/izel_doscaminos.jpg',
                 [
                     { text: 'Visitar los Mayak', action: goToMayak },
                     { text: 'Visitar los Urbanitas', action: goToUrbanitas }
                 ]
             );
             break;
+    }
+}
+
+// funcion para retroceder en la historia
+function prevStory() {
+    if (storyHistory.length > 0) {
+        storyStep = storyHistory.pop(); //recupera el ultimo paso de la historia
+        // ejecuta el paso especifico dependiendo del valor actual de storyStep
+        renderStep(storyStep);
     }
 }
 
@@ -102,10 +115,11 @@ function hablarConVictor() {
         "Izel: Claro, Víctor. Nos vemos, hasta luego.\n\n" +
         "Luego de llegar donde los Mayak, Izel empieza a hablar con ellos y les propone diversas ideas sobre cómo rescatar el árbol.\n" +
         "Líder Mayak: No podemos dañar nuestra energía, debemos intentar reparar todo esto con nuestro espíritu.",
-        '',
+        'imagenes/izel_victor.jpg',
         []
     );
     continueButton.onclick = ofrecerRecado;
+    
 }
 
 function ignorarVictor() {
@@ -122,7 +136,7 @@ function ignorarVictor() {
 function Mayak2() {
     displayStory(
         "Izel, al ver que no están llegando a nada, piensa si debería ir directamente con los Urbanitas o hablar con Víctor.",
-        '',
+        'imagenes/izel_doscaminos.jpg',
         [
             { text: 'Hablar con Víctor', action: hablarConVictor2 },
             { text: 'Ir directamente donde los Urbanitas', action: finalUrbanitas }
@@ -133,7 +147,7 @@ function Mayak2() {
 function finalUrbanitas() {
     displayStory(
         "Izel llega directamente con los Urbanitas. Luego de hablar un rato con ellos, deciden intentar salvar el árbol sin la ayuda de los Mayak.",
-        '',
+        'imagenes/izel_liderfutu.jpg',
         []
     );
     continueButton.onclick = finalNeutral2;
@@ -147,7 +161,7 @@ function hablarConVictor2() {
         "Víctor: Entiendo, los Mayak siempre han sido un poco necios. Aun así, mi gente está dispuesta a ayudar. Mira esto.\n\n" +
         "Izel recibe una carta de Víctor con unas instrucciones para cooperar con los Mayak."+
         "Izel al ver esto decide ir corriendo con los urbanitas para que le expliquen mas y asi llegar a un acuerdo con los mayak para cooperar",
-        '',
+        'imagenes/izel_victor.jpg',
         []
     )
     continueButton.onclick = Mayak3;
@@ -157,9 +171,8 @@ function Mayak3() {
         "Luego de llegar donde los Urbanitas se dirigen corriendo donde el lider, al hablar con el se da cuenta que su actitud es muy diferente a lider Mayak." +
         "Izel entiende mejor el plan de los Urbanitas, juntar el poder de los Mayak y la tecnologia urbanitas es asombroso y parece ser la unica forma de salvar el arbol."+
         "Aun asi Izel ya habia hablado con los mayak y auquel hombre parece no cooperar",
-        '',
-        [  
-        ]
+        'imagenes/izel_liderfutu.jpg',
+        []
     )
     continueButton.onclick = Mayak4;
 }
@@ -169,7 +182,7 @@ function Mayak4() {
     displayStory(
         "Izel decide hacer el ultimo intento dirigiendose donde el lider mayak, le explica el plan, pero este definitivamente decide no cooperar" +
         "marcando de esta manera un no rotundo, Izel vuelve donde el lider Urbanita y le cuenta como el lider Mayak decidio no cooperar, aun asi los urbanitas intentan por su cuenta salvar el arbol con ayuda unicamente de izel",
-        '',
+        'imagenes/izel_futurista.jpg',
         []
     )
     continueButton.onclick = finalNeutral;
@@ -182,7 +195,7 @@ function Mayak4() {
 function ofrecerRecado() {
     displayStory(
         "Izel entrega el recado de Víctor. El líder Mayak lo toma, lo lee, y lo rechaza enojado, retirándose sin decir una palabra. Izel, asombrada, lee el contenido de la propuesta, tras leer va directamente hacia los Urbanitas",   
-        '',
+        'imagenes/lider_mayak.jpg',
         [])
         continueButton.onclick = goToUrbanitas;
 }
@@ -200,7 +213,7 @@ function goToUrbanitas() {
 function urbanitasParte2(){
     displayStory(
         "Izel: Victor por fin te veo, lei la carta, ahora comprendo, pero el lider Mayak no creo que quiera cooperar con el plan.\n\r Victor: Aun asi tenemos que convencerlo, de lo contrario sera nuestro fin.", 
-        '',
+        'izel_victor.jpg',
         []
     );
     continueButton.onclick = urbanitasParte3;
@@ -216,8 +229,8 @@ function urbanitasParte3(){
 
 function urbanitasParte4(){
     displayStory("Luego de convencer al lider de los mayak, ambos pueblos se reunen y llevando a cabo el plan de unir fuerzas, dirigen toda su energia y tecnologia hacia el arbol"+
-        "Al primcipio parece que no es suficiente, el arbol no parece tomar forma, Izel comienza a ensar que todo fue en vano...",
-        "", 
+        "Al principio parece que no es suficiente, el arbol no parece tomar forma, Izel comienza a pensar que todo fue en vano...",
+        "imagenes/encuentro.jpg", 
         []
     );
     continueButton.onclick = urbanitasParte5;
@@ -226,7 +239,7 @@ function urbanitasParte4(){
 function urbanitasParte5(){
     displayStory("La gente alrededor del arbol notan como los lideres de cada pueblo estaban dando lo mejor de si, asi que deciden ayudarlos cada pueblo con su energia, Izel logra ver un chispazo de esperanza, y motiva a los demas a ayudarlos,"+
         "Izel: ¡¡¡Parece ser que esta funcionando, lo vamos a Lograr!!!!",
-        "", 
+        "imagenes/todosUnidos.jpg", 
         []
     );
     continueButton.onclick = urbanitasParte6;
@@ -234,7 +247,7 @@ function urbanitasParte5(){
 
 function urbanitasParte6(){
     displayStory("Es asi como despues de tanto esfuerzo, Izel sintiendo una calma que recorre todo su cuerpo y mirando a todo su alrededor, ambos pueblos unidos, juntos, luchando por un bien común, El arbol se logor salvar y meses depues ambos pueblos se unen para ser uno solo. FIN. ",
-        '',
+        'imagenes/arbolVivo.jpg',
         []
     );
     continueButton.onclick = urbanitasParte6;
@@ -267,7 +280,7 @@ function finalNeutral() {
     displayStory(
         "Tras el rechazo de su líder, Izel se siente decepcionada. Comprende las ideas de los Urbanitas, pero no logra comprender a su líder. Sin embargo, no se da por vencida y decide ayudar a los Urbanitas en un último intento por salvar su pueblo, donde nació y creció." +
         "Todos los Urbanitas, dispuestos a ayudar, se reúnen...",
-        '',
+        'imagenes/futuristas.jpg',
         []
     );
     continueButton.onclick = finalNeutral2;
@@ -277,7 +290,7 @@ function finalNeutral2() {
     displayStory(
         "Izel comienza a reunir toda su energía y la dirige hacia los Urbanitas, quienes la canalizan directamente al árbol. Pero este no reacciona. Intentan una y otra vez, pero nada, nada, nada." +
         "No es suficiente. Este último y desesperado intento parece ser el final...",
-        '',
+        'imagenes/izel_futurista.jpg',
         []
     );
     continueButton.onclick = finalNeutral3;
@@ -287,7 +300,7 @@ function finalNeutral3() {
     displayStory(
         "Izel, con un último grito, logra dirigir toda su energía hacia los Urbanitas. Víctor, al ver esto, usa toda su tecnología y, con la ayuda de los demás Urbanitas, le dan una última chispa de vida al árbol." +
         "Contra todo pronóstico, el árbol logra recuperar algo de su fuerza, pero no es suficiente. Tiempo después, Izel se recupera, pero se da cuenta de que su pueblo no es el mismo. Lo último que recuerda es a Víctor. Izel: '¿Perdí el conocimiento? ¿Por cuánto tiempo?'",
-        '',
+        'imagenes/izel_desmayada.jpg',
         []
     );
     continueButton.onclick = finalNeutral4;
@@ -297,7 +310,7 @@ function finalNeutral4() {
     displayStory(
         "Izel se asoma a la ventana y el panorama no es nada alentador. Decide salir para echar un mejor vistazo. Al salir, se encuentra con una enfermera de su tribu, quien le cuenta lo sucedido: Izel ha dormido por 2 años y ahora los dos pueblos están en guerra." +
         "Izel queda muda ante estas palabras: 'No es posible... ¿Dos años?'. Su mundo se ha sumido en el caos, su esfuerzo no fue suficiente, y ahora no hay nada que hacer. Mayak y Urbanitas pelean por los pocos recursos restantes. Al parecer, este es el FIN.",
-        '',
+        'imagenes/guerra.jpg',
         []
     );
    resetButton.onclick = nextStory;
@@ -307,3 +320,4 @@ function finalNeutral4() {
 // Iniciar la historia
 nextStory();
 continueButton.onclick = nextStory;
+resetButton.onclick = prevStory;
