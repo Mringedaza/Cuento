@@ -1,0 +1,125 @@
+/* Estilos generales */
+body {
+    font-family: 'Georgia', serif;
+    background-color: #1a2b2d; /* Fondo oscuro para darle un ambiente místico */
+    color: #f4e8c1; /* Color claro de texto para contraste */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal del juego */
+#game-container {
+    background-color: #2d4c57; /* Color de fondo oscuro inspirado en tonos naturales */
+    border: 3px solid #c19f58; /* Borde dorado para darle un toque elegante */
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 700px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+/* Título del juego */
+h1 {
+    color: #e0c97f; /* Color dorado para el título */
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+/* Estilo de texto principal de la historia */
+#story {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Botones de opción */
+#choices button {
+    background-color: #3c6e71; /* Color verde oscuro para los botones */
+    color: #f4e8c1;
+    border: 2px solid #284b63;
+    padding: 12px 18px;
+    font-size: 1em;
+    font-family: 'Georgia', serif;
+    margin: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efectos de hover y enfoque en botones */
+#choices button:hover {
+    background-color: #d9b76e; /* Color más claro para el hover */
+    color: #2d4c57;
+    transform: scale(1.05); /* Agranda un poco el botón */
+}
+
+#choices button:focus {
+    outline: none;
+    background-color: #e0c97f;
+}
+
+/* Botón para continuar */
+#continue-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    background-color: #3c6e71;
+    color: #f4e8c1;
+    border: 2px solid #284b63;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efectos en botón de continuar */
+#continue-button:hover {
+    background-color: #d9b76e;
+    color: #2d4c57;
+    transform: scale(1.05);
+}
+
+#continue-button:focus {
+    outline: none;
+    background-color: #e0c97f;
+}
+
+/* Añadir transición a los textos */
+#story, h1 {
+    transition: color 0.4s, background-color 0.4s;
+}
+
+img 
+{
+    height: 500px;
+    width: 500px;
+}
+#back-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    background-color: #3c6e71;
+    color: #f4e8c1;
+    border: 2px solid #284b63;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Efectos en botón de continuar */
+#back-button:hover {
+    background-color: #d9b76e;
+    color: #2d4c57;
+    transform: scale(1.05);
+}
+
+#back-button:focus {
+    outline: none;
+    background-color: #e0c97f;
+}
