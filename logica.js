@@ -2,7 +2,6 @@
 const storyElement = document.getElementById('story');
 const choicesElement = document.getElementById('choices');
 const continueButton = document.getElementById('continue-button');
-const resetButton = document.getElementById('back-button')
 
 // Estado del juego
 let storyStep = 0;
@@ -32,7 +31,6 @@ function displayStory(text, imageUrl = '', choices = []) {
 
     // Mostrar el botón de continuar si no hay opciones
     continueButton.style.display = choices.length === 0 ? 'block' : 'none';
-    resetButton.style.display = storyStep > 0 ? 'block' : 'none';
 
     
 }
