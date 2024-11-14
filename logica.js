@@ -82,15 +82,6 @@ function nextStory() {
     }
 }
 
-// funcion para retroceder en la historia
-function prevStory() {
-    if (storyHistory.length > 0) {
-        storyStep = storyHistory.pop(); //recupera el ultimo paso de la historia
-        // ejecuta el paso especifico dependiendo del valor actual de storyStep
-        renderStep(storyStep);
-    }
-}
-
 function goToMayak() {
     displayStory(
         "Rumbo hacia los Mayak, el pueblo de Izel, donde la fuerza reside en el espíritu y su fuerte conexión con el árbol. Izel encuentra a un viejo conocido, Víctor.",
