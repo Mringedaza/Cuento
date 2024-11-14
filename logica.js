@@ -318,4 +318,3 @@ function finalNeutral4() {
 // Iniciar la historia
 nextStory();
 continueButton.onclick = nextStory;
-resetButton.onclick = prevStory;
